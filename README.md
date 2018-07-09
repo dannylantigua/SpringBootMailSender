@@ -23,9 +23,9 @@ public MailController(MailSender mailSender){
 }
 ```
 
-How do I tell Spring with class do I want to Inject?
+How do I tell Spring what class do I want to Inject?
 
-You only have to add the *@Component* annotation on top of the Java class:
+You only have to add the *@Component* annotation on top of the Java class and it will understand that THIS is the class it has to inject on the constructor:
 
 ```
 @Component
