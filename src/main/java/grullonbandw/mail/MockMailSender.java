@@ -4,9 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
-// Spring Boot will inject the class with
-// the @Component annotation automatically
-@Component
 public class MockMailSender implements MailSender {
 	
 	// to write on the console

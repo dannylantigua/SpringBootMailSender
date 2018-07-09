@@ -1,5 +1,6 @@
 package grullonbandw.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,8 +13,8 @@ public class MailController {
 	private MailSender mailSender;
 	
 	//Constructor Injection
-	public MailController(MailSender mailSender){
-		this.mailSender = mailSender;
+	public MailController(@Qualifier("smtpMailSender") MailSender mail){
+		this.mailSender = mail;
 	}
 		
 	@RequestMapping("/mail")

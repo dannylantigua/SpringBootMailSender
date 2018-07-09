@@ -1,36 +1,36 @@
 ## Mail Sender Demo with Spring Boot
 
-When using the standard Spring framework in order to do Dependency Injection, we need to configure the application-context.xml file. Spring Boot is annotation driven configuration, which means we don't have to touch the xml file/s. It is as easy as creating a new project with the Spring Initializr.
+### Use of Java Class Configuration File
 
-How do I inject a class/object?
-
-You can do that with Property Injection, adding *@Autowired* when declaring the object:
+Using a Java Class configuration file, we are able to declare the beans manually. What we have to do is to add the *@Configuration* annotation above the Class and the *@Bean* annotation above the methods that will return the correct class implementation.
 
 ```
-@Autowired
-private MailSender mailSender;
-```
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-Also Constructor Injection can be used:
+@Configuration
+public class MailConfig {
 
-```
-// Not necessary to use @Autowired annotation
-private MailSender mailSender;
+	@Bean
+	public MailSender mockMailSender() {
+		return new MockMailSender();
+	}
 
-// Constructor Injection
-public MailController(MailSender mailSender){
-    this.mailSender = mailSender;
+	@Bean
+	public MailSender smtpMailSender() {
+		return new SmtpMailSender();
+	}
 }
 ```
 
 How do I tell Spring what class do I want to Inject?
 
-You only have to add the *@Component* annotation on top of the Java class and it will understand that THIS is the class it has to inject on the constructor:
+You only have to add the *@Qualifier ("methodName")* annotation passed as a parameter on the constructor. Spring will know we want to inject 'smtpMailSender':
 
 ```
-@Component
-public class MockMailSender implements MailSender {
-    //content
+//Constructor Injection
+public MailController(@Qualifier("smtpMailSender") MailSender mail){
+	this.mailSender = mail;
 }
 ```
 
