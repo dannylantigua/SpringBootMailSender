@@ -1,6 +1,7 @@
 package grullonbandw.mail;
 
-public interface MailSender {
+import javax.mail.MessagingException;
 
-	void send(String to, String subject, String body); 
+public interface MailSender {
+	void send(String to, String subject, String body) throws MessagingException; 
 }

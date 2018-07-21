@@ -1,5 +1,7 @@
 package grullonbandw.controller;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +20,9 @@ public class MailController {
 	}
 		
 	@RequestMapping("/mail")
-	public String mail() {
+	public String mail() throws MessagingException {
 		
-		mailSender.send("mail@example.com", "Test Mail", "This is a body example for Test Mail");
+		mailSender.send("test_email@gmail.com", "Test Mail", "This is a body example for Test Mail");
 		return "Mail Sent!";
 	}
 }
